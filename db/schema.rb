@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125061442) do
+ActiveRecord::Schema.define(version: 20160127214623) do
 
   create_table "advertisements", force: :cascade do |t|
     t.string   "title"
@@ -48,12 +48,42 @@ ActiveRecord::Schema.define(version: 20160125061442) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sponsored_posts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sponsoredposts", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "topic_id"
+  end
+
+  add_index "sponsoredposts", ["topic_id"], name: "index_sponsoredposts_on_topic_id"
+
   create_table "topics", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.boolean  "public",      default: true
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.boolean  "public",            default: true
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "sponsored_post_id"
+  end
+
+  add_index "topics", ["sponsored_post_id"], name: "index_topics_on_sponsored_post_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
 end
