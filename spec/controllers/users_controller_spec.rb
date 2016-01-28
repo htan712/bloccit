@@ -4,7 +4,7 @@ RSpec.describe UsersController, type: :controller do
   let(:new_user_attributes) do
     {
       name: "HockTan",
-      email: "hocktan@bloc.io",
+      email: "hock.tan712@gmail.com",
       password: "blochead",
       password_confirmation: "blochead"
     }
