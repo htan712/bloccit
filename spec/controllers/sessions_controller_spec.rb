@@ -50,7 +50,7 @@ RSpec.describe SessionsController, type: :controller do
 
     it "deletes the user's session" do
       delete :destroy, id: my_user.id
-      expect(assings(:session)).to be_nil
+      expect(assigns(:session)).to be_nil
     end
 
     it "flashes #notice" do
