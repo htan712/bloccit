@@ -19,7 +19,6 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new(topic_params)
 
-
     if @topic.save
       @topic.labels = Label.update_labels(params[:topic][:labels])
       redirect_to @topic, notice: "Topic was saved."
@@ -67,7 +66,7 @@ class TopicsController < ApplicationController
   end
 
   def authorize_user
-    unless current_user.admin?
+    unless current_user.admin? || current_user.moderator?
       flash[:alert] = "You must be an admin to do that."
       redirect_to topics_path
     end
