@@ -13,25 +13,15 @@
 
 ActiveRecord::Schema.define(version: 20160131093825) do
 
-  create_table "advertisements", force: :cascade do |t|
-    t.string   "title"
-    t.text     "copy"
-    t.integer  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "comments", force: :cascade do |t|
     t.text     "body"
     t.integer  "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.integer  "topic_id"
   end
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
-  add_index "comments", ["topic_id"], name: "index_comments_on_topic_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "favorites", force: :cascade do |t|
@@ -74,43 +64,13 @@ ActiveRecord::Schema.define(version: 20160131093825) do
   add_index "posts", ["topic_id"], name: "index_posts_on_topic_id"
   add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
-  create_table "questions", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.boolean  "resolved"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sponsored_posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sponsoredposts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.integer  "price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "topic_id"
-  end
-
-  add_index "sponsoredposts", ["topic_id"], name: "index_sponsoredposts_on_topic_id"
-
   create_table "topics", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.boolean  "public",            default: true
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.integer  "sponsored_post_id"
+    t.boolean  "public",      default: true
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
-
-  add_index "topics", ["sponsored_post_id"], name: "index_topics_on_sponsored_post_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
