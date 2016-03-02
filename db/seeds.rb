@@ -7,48 +7,38 @@
 end
 users = User.all
 
-15.times do
-  Topic.create!(
-    name: RandomData.random_sentence,
-    description: RandomData.random_paragraph
+
+Topic.create!(
+    name: "Upcoming Rave Events",
+    description: "share upcoming rave events with links"
+  )
+end
+Topic.create!(
+    name: "Recipe Book, Homecook meals"
+    description: "share what you can do in the kitchen."
+  )
+end
+Topic.create!(
+    name: "Workout routines and tips"
+    description: "share your secrets to help others and improve active lifestyle."
   )
 end
 topics = Topic.all
 
-50.times do
-  post = Post.create!(
-    user: users.sample,
-    topic: topics.sample,
-    title: RandomData.random_sentence,
-    body: RandomData.random_paragraph
-  )
-  post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
-  rand(1..5).times {post.votes.create!(value: [-1, 1].sample, user: users.sample)}
-end
-
-posts = Post.all
-
-100.times do
-  Comment.create!(
-    user: users.sample,
-    post: posts.sample,
-    body: RandomData.random_paragraph
-  )
-end
-
 admin = User.create!(
   name:     'Admin User',
-  email:    'admin@example.com',
+  email:    'hock.tan712@gmail.com',
   password: 'helloworld',
   role:     'admin'
 )
 
 member = User.create!(
   name:     'Member User',
-  email:    'member@example.com',
+  email:    'jtan712@gmail.com',
   password: 'helloworld',
   role:     'member'
 )
+
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
